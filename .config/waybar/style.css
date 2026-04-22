@@ -1,82 +1,101 @@
+/* -----------------------------
+   Global
+------------------------------ */
+
 * {
   font-family: "JetBrainsMonoNerdFontMono";
-  font-weight: bold;
-  min-height: 0;
-  font-size: 98%;
-  font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
-  padding: 1px;
+  font-size: 14px;
 }
 
 window#waybar {
-  background-color: rgba(0, 0, 0, 0.1);
-  transition-property: background-color;
-  transition-duration: .5s;
+  background: #282828;
+  color: #EBDBB2;
+
+  border-top: 3px solid #1B1B1B;
+  border-bottom: 3px solid #1B1B1B;
 }
 
-window#waybar.hidden {
-  opacity: 0.5;
+/* -----------------------------
+   Module containers
+------------------------------ */
+
+.modules-left,
+.modules-center,
+.modules-right {
+  border-top: 3px solid #1B1B1B;
+  border-bottom: 3px solid #1B1B1B;
 }
 
-window#waybar.empty {
-  background-color: transparent;
+.modules-left {
+  border-left: 3px solid #1B1B1B;
 }
 
-window#waybar.empty #window {
-  padding: 0px;
-  border: 0px;
-  background-color: transparent;
+.modules-right {
+  border-right: 3px solid #1B1B1B;
 }
 
-tooltip {
-  opacity: 1;
-  border-radius: 10px;
+/* -----------------------------
+   Uniform module spacing
+------------------------------ */
+
+/* THIS FIXES YOUR PROBLEM */
+
+.modules-left > widget,
+.modules-center > widget,
+.modules-right > widget {
+  padding-left: 0.9em;
+  padding-right: 0.9em;
 }
 
-tooltip label {
-  padding: 10px;
-  color: #ebdbb2;
-}
+/* -----------------------------
+   Workspace styling
+------------------------------ */
 
-#custom-cava,
-#clock,
-#cpu,
-#memory,
-#battery,
-#mpris,
-#network,
-#pulseaudio,
-#temperature,
-#workspaces,
-#custom-menu,
-#custom-swaync {
-  border-radius: 10px;
-  color: #ebdbb2;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 6px;
-  padding-right: 6px;
-}
-
-#window {
-  color: #ebdbb2;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-right: 6px;
-  padding-left: 6px;
-  border-radius: 12px;
+#workspaces {
+  padding-left: 0.8em;
 }
 
 #workspaces button {
-  margin: 2px;
-  box-shadow: none;
-  text-shadow: none;
-  border-radius: 6px;
-  padding-left: 6px;
-  padding-right: 6px;
-  background-color: #ebdbb2;
-  color: #282828;
+  padding: 0 0.45em;
+  color: #EBDBB2;
 }
 
-#temperature.critical {
-  background-color: red;
+#workspaces button.visible.active {
+  color: #EA6962;
+}
+
+/* -----------------------------
+   Clock
+------------------------------ */
+
+#clock {
+  padding-left: 1em;
+  padding-right: 1em;
+
+  border-right: 3px solid #D8A657;
+}
+
+/* -----------------------------
+   System modules
+------------------------------ */
+
+#cpu,
+#memory,
+#temperature,
+#battery,
+#pulseaudio,
+#custom-wifi,
+#tray {
+  padding-left: 0.9em;
+  padding-right: 0.9em;
+}
+
+/* -----------------------------
+   Tooltip
+------------------------------ */
+
+tooltip {
+  background: #282828;
+  border: 2px solid #1B1B1B;
+  font-size: 13px;
 }

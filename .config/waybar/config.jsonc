@@ -1,32 +1,119 @@
 {
-"include": "~/dotfiles/.config/waybar/modules",
-"layer": "top",
-"exclusive": true,
-"passthrough": false,
-"position": "top",
-"spacing": 3,
-"fixed-center": true,
-"ipc": true,
-"margin-top": 0,
-"margin-left": 0,
-"margin-right": 0,
-"margin-bottom": 0,
+    "layer": "top",
 
-"modules-left": [
-  "hyprland/workspaces",
-  "clock",
-  "custom/cava",
-],
+    "exclusive": true,
+    "passthrough": false,
 
-"modules-center": [
-	"hyprland/window"
-	], 
+    "position": "top",
+    "fixed-center": true,
 
-"modules-right": [
-	"cpu", 
-	"temperature", 
-	"memory",
-    "battery",
-	"pulseaudio"
-	]
+    "spacing": 1,
+    "margin-top": 10,
+    "margin-left": 10,
+    "margin-right": 10,
+    "margin-bottom": 0,
+
+    "modules-left": [
+        "clock"
+    ],
+
+    "modules-center": [
+        "hyprland/workspaces"
+    ], 
+
+    "modules-right": [
+        "cpu", 
+        "memory",
+        "temperature", 
+        "battery",
+        "pulseaudio",
+        "custom/wifi",
+        "tray"
+    ],
+
+    "hyprland/workspaces": {
+        "active-only": false,
+        "all-outputs": true,
+        "format": "{icon}",
+        "show-special": false,
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1",
+
+        "format-icons": {
+            "1": "一",
+            "2": "二",
+            "3": "三",
+            "4": "四",
+            "5": "五",
+            "6": "六",
+            "7": "七",
+            "8": "八",
+            "9": "九",
+            "10": "十"
+        }
+    },
+
+    "clock": {
+        "interval": 1,
+        "format": "{:%H:%M:%S}",
+        "tooltip-format": "{:%Y/%m/%d}"
+    },
+    
+    "cpu": {
+        "format": "cpu {usage}%",
+        "interval": 1
+    },
+
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": " {icon} {capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+
+    "memory": {
+        "interval": 1,
+        "format": "mem {percentage}%",
+        "format-alt-click": "click",
+        "tooltip": true,
+        "tooltip-format": "{used:0.1f} GB / {total:0.1f} GB",
+        "on-click": "kitty -c ~/.config/kitty/kitty.conf --class dropdown-term --title btop sh -c 'btop'"
+    },
+        
+    "pulseaudio": {
+        "format": "vol {volume}%",
+        "format-bluetooth": "blue-vol {volume}%",
+        "ignored-sinks": ["Easy Effects Sink"],
+        "scroll-step": 5.0,
+        "on-click": "pavucontrol -t 3",
+        "tooltip-format": " {desc} | {volume}%",
+        "smooth-scrolling-threshold": 1
+    },
+        
+    "temperature": {
+        "interval": 1,
+        "tooltip": false,
+        "hwmon-path": ["/sys/class/hwmon/hwmon1/temp1_input", "/sys/class/thermal/thermal_zone0/temp"],
+        "critical-threshold": 82,
+        "format-critical": " {temperatureC}°C",
+        "format": " {temperatureC}°C"
+    },
+
+    "custom/wifi": {
+        "exec": "~/.config/waybar/scripts/wifi.sh",
+        "interval": 5,
+        "return-type": "text",
+        "on-click": "nm-connection-editor"
+    }
 }
+
